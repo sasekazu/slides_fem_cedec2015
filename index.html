@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>slides_fem_cedec2015</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="Presentation material for CEDEC2015">
+		<meta name="author" content="Kazuya Sase">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -34,6 +34,13 @@
 		<![endif]-->
 	</head>
 
+<!-- 
+メモ：
+- プロジェクタはおそらく HD1366*768 FWXGA　アスペクト比 16:9 
+
+-->
+
+	
 	<body>
 
 		<div class="reveal">
@@ -41,24 +48,122 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<h4>インタラクティブ弾性体シミュレーションのための</h4>
+					<h3>有限要素法の実装とGPUによる高速化</h3>
+					<h6><small>佐瀬 一弥（北大），江間章斗（北大），福原洸（東北大），辻田哲平（防衛大），近野敦（北大）</small> </h6>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+					<section>
+						<h3>About us</h3>
+						<ul>
+							 <li>北大 情報科学研究科 知能ロボットシステム研究室</li>
+							 <ul>
+								 <li>ヒューマノイドロボット</li>
+								 <li>無人航空機</li>
+								 <li>脳外科手術シミュレータ</li>
+							 </ul>
+						</ul>
+						<img src="figs/lab.png" />
+					</section>
+					
 				</section>
+				
+				
+				<section>
+				
+					<section>
+						<h3>脳外科手術シミュレータ</h3>
+						<video src="movie/retraction.mp4" controls loop autoplay width="1000"></video> 
+						<p>脳組織に損傷を与えない力加減を訓練できるシステムを作りたい</p>
+					</section>
+					
+					<section>
+						<h3>物理演算に対するシステム要求</h3>
+						<ul>
+							<li>現実に近い物理現象</li>
+							<li>リアルタイム計算</li>
+						</ul>
+					</section>
+					
+					<section>
+					
+					</section>					
+					<section>
+						<h3>選択肢</h3>
+						<ul>
+							<li>バネ質点モデル</li>
+							<ul>
+								<li>計算コスト ○</li>
+								<li>物理現象の正確さ　△</li>
+							</ul>
+							<li>シェイプマッチング法</li>
+							<ul>
+								<li>計算コスト　○</li>
+								<li>物理現象の正確さ　×？</li>
+							</ul>
+							<li>有限要素法</li>
+								<li>計算コスト　×　</li>
+								<li>物理現象の正確さ　○</li>
+							<li>その他</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h3>どのくらい達成できたか</h3>
+						<p>CPU GPU</p>
+					</section>
+										
+				</section>				
+				
+				<section>
+					<section>
+						<h3>Contents</h3>
+						<ul>
+							<li>有限要素法の概要</li>
+							<li>実装</li>
+							<li>GPUによる高速化</li>
+						</ul>
+					</section>				
+				</section>
+				
+				<section>
+					<section>
+					<h3>有限要素法の概要</h3>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+					<h3>実装</h3>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+					<h3>GPUによる高速化</h3>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h3>まとめ</h3>
+					</section>
+					
+					<section>
+						<h3>デモのご案内</h3>
+					</section>
+					
+					<section>
+						<h3>ご質問</h3>
+					</section>
+				</section>
+				
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
+						<h3>Vertical Slides</h3>
 						<p>Slides can be nested inside of each other.</p>
 						<p>Use the <em>Space</em> key to navigate through all slides.</p>
 						<br>
@@ -67,11 +172,11 @@
 						</a>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
+						<h3>Basement Level 1</h3>
 						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
+						<h3>Basement Level 2</h3>
 						<p>That's it, time to go back up.</p>
 						<br>
 						<a href="#/2">
@@ -81,14 +186,14 @@
 				</section>
 
 				<section>
-					<h2>Slides</h2>
+					<h3>Slides</h3>
 					<p>
 						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
 					</p>
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
+					<h3>Point of View</h3>
 					<p>
 						Press <strong>ESC</strong> to enter the slide overview.
 					</p>
@@ -98,7 +203,7 @@
 				</section>
 
 				<section>
-					<h2>Touch Optimized</h2>
+					<h3>Touch Optimized</h3>
 					<p>
 						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
 					</p>
@@ -124,7 +229,7 @@
 
 				<section>
 					<section id="fragments">
-						<h2>Fragments</h2>
+						<h3>Fragments</h3>
 						<p>Hit the next arrow...</p>
 						<p class="fragment">... to step through ...</p>
 						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
@@ -134,7 +239,7 @@
 						</aside>
 					</section>
 					<section>
-						<h2>Fragment Styles</h2>
+						<h3>Fragment Styles</h3>
 						<p>There's different types of fragments, like:</p>
 						<p class="fragment grow">grow</p>
 						<p class="fragment shrink">shrink</p>
@@ -146,7 +251,7 @@
 				</section>
 
 				<section id="transitions">
-					<h2>Transition Styles</h2>
+					<h3>Transition Styles</h3>
 					<p>
 						You can select from different transitions, like: <br>
 						<a href="?transition=none#/transitions">None</a> -
@@ -159,7 +264,7 @@
 				</section>
 
 				<section id="themes">
-					<h2>Themes</h2>
+					<h3>Themes</h3>
 					<p>
 						reveal.js comes with a few themes built in: <br>
 						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
@@ -179,7 +284,7 @@
 
 				<section>
 					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
+						<h3>Slide Backgrounds</h3>
 						<p>
 							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
 						</p>
@@ -188,26 +293,26 @@
 						</a>
 					</section>
 					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
+						<h3>Image Backgrounds</h3>
 						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
 					</section>
 					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
+						<h3>Tiled Backgrounds</h3>
 						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
 					</section>
 					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
 						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
+							<h3>Video Backgrounds</h3>
 							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
 						</div>
 					</section>
 					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
+						<h3>... and GIFs!</h3>
 					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
+					<h3>Background Transitions</h3>
 					<p>
 						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
 					</p>
@@ -215,7 +320,7 @@
 				</section>
 
 				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
+					<h3>Background Transitions</h3>
 					<p>
 						You can override background transitions per-slide.
 					</p>
@@ -223,7 +328,7 @@
 				</section>
 
 				<section>
-					<h2>Pretty Code</h2>
+					<h3>Pretty Code</h3>
 					<pre><code data-trim contenteditable>
 function linkify( selector ) {
   if( supports3DTransforms ) {
@@ -244,7 +349,7 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Marvelous List</h2>
+					<h3>Marvelous List</h3>
 					<ul>
 						<li>No order here</li>
 						<li>Or here</li>
@@ -254,7 +359,7 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
+					<h3>Fantastic Ordered List</h3>
 					<ol>
 						<li>One is smaller than...</li>
 						<li>Two is smaller than...</li>
@@ -263,7 +368,7 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Tabular Tables</h2>
+					<h3>Tabular Tables</h3>
 					<table>
 						<thead>
 							<tr>
@@ -293,7 +398,7 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Clever Quotes</h2>
+					<h3>Clever Quotes</h3>
 					<p>
 						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
 						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
@@ -305,7 +410,7 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Intergalactic Interconnections</h2>
+					<h3>Intergalactic Interconnections</h3>
 					<p>
 						You can link between slides internally,
 						<a href="#/2/3">like this</a>.
@@ -313,7 +418,7 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Speaker View</h2>
+					<h3>Speaker View</h3>
 					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
 					<p>Press the <em>S</em> key to try it out.</p>
 
@@ -323,13 +428,13 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<h2>Export to PDF</h2>
+					<h3>Export to PDF</h3>
 					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
 					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 				</section>
 
 				<section>
-					<h2>Global State</h2>
+					<h3>Global State</h3>
 					<p>
 						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
 						will be added as a class to the document element when the slide is open. This lets you
@@ -338,7 +443,7 @@ function linkify( selector ) {
 				</section>
 
 				<section data-state="customevent">
-					<h2>State Events</h2>
+					<h3>State Events</h3>
 					<p>
 						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
 					</p>
@@ -350,14 +455,14 @@ Reveal.addEventListener( 'customevent', function() {
 				</section>
 
 				<section>
-					<h2>Take a Moment</h2>
+					<h3>Take a Moment</h3>
 					<p>
 						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
 					</p>
 				</section>
 
 				<section>
-					<h2>Much more</h2>
+					<h3>Much more</h3>
 					<ul>
 						<li>Right-to-left support</li>
 						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
@@ -391,8 +496,15 @@ Reveal.addEventListener( 'customevent', function() {
 				progress: true,
 				history: true,
 				center: true,
+				slideNumber: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				
+			    // The "normal" size of the presentation, aspect ratio will be preserved
+				// when the presentation is scaled to fit different resolutions. Can be
+				// specified using percentage units.
+				width: 1366,
+				height: 768,
 
 				// Optional reveal.js plugins
 				dependencies: [
