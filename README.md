@@ -11,7 +11,10 @@ CEDEC2015 webページ
 http://cedec.cesa.or.jp/2015/session/AC/5317.html
 
 
-### Movies
+### Downloads
+
+Slide resources http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources.zip
+
 ショートセッション アピール動画 
 [[Download 1280x720 (22MB)](http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/short_session_full.mp4)]
 [[Download 640x360 (6MB)](http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/short_session_mobile.mp4)]
@@ -25,4 +28,4 @@ http://cedec.cesa.or.jp/2015/session/AC/5317.html
 
 Uses reveal.js https://github.com/hakimel/reveal.js
 
-MEMO: Resources http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources
+MEMO: Resources cite http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources
