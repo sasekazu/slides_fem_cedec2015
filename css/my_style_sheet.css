@@ -1,0 +1,14 @@
+
+#bottom_div {
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	width: 800px;
+	height: 100px;	
+	text-align: right;
+}
+
+#bottom_p {
+	color: white;
+	font-size: 24px;
+}
