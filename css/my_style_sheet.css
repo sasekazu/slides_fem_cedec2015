@@ -1,14 +1,16 @@
 
-#bottom_div {
+#distribute_div {
 	position: absolute;
 	top: 0px;
 	right: 10px;
 	width: 800px;
-	height: 100px;	
+	height: 30px;	
 	text-align: right;
 }
 
-#bottom_p {
+.distribute_p {
 	color: white;
 	font-size: 24px;
+	padding: 0px;
+	margin: 5px;
 }
