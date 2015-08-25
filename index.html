@@ -55,9 +55,40 @@
 					<h3>有限要素法の実装とGPUによる高速化</h3>
 					<h6><small>佐瀬 一弥（北大），江間章斗（北大），福原洸（東北大），辻田哲平（防衛大），近野敦（北大）</small> </h6>
 				</section>
-				
-				<!-- Results -->
+                
+                				<!-- About us セクション -->
 				<section>
+					<section>
+						<h3>About us</h3>
+						<ul>
+							 <li>北大 情報科学研究科 知能ロボットシステム研究室</li>
+							 <ul>
+								 <li>ヒューマノイドロボット</li>
+								 <li>無人航空機</li>
+								 <li>脳外科手術シミュレータ</li>
+							 </ul>
+						</ul>
+						<img src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/lab.png" />
+					</section>
+					
+					<section>
+						<h3>脳外科手術シミュレータ</h3>
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/retraction.mp4" controls loop muted width="1000"></video> 
+                        <p>臓器の力学挙動をできる限り正確に計算　→　有限要素法</p>
+					</section>
+					
+                    <section>
+                    	<h3>有限要素法は難しい・・・？</h3>
+                        	<p>我々は物理シミュレーションの専門家ではなかった，手探り状態の開発の過程で大変だったことは・・・．</p>
+                        	<ul>
+                            	<li>基礎的な入門書は実用性が低い（そもそもインタラクティブCGを目的としていない）</li>
+                                <li>高度な書籍は理解できない</li>
+                                <li>グラフィクス系論文誌の中から理解できる範囲で試してみる他ない</li>
+                            </ul>
+                          <p></p>
+                        <h3>次のスライドから現状で実現できたシミュレーションをご紹介します</h3>
+                    </section>					
+					
 					<section>
 						<h3>Polygon mesh embedding</h3>
 						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/armadillo.mp4" controls loop  muted  height="650"></video> 
@@ -87,61 +118,6 @@
 					</section>				
 				</section>
 
-				<!-- About us セクション -->
-				<section>
-					<section>
-						<h3>About us</h3>
-						<ul>
-							 <li>北大 情報科学研究科 知能ロボットシステム研究室</li>
-							 <ul>
-								 <li>ヒューマノイドロボット</li>
-								 <li>無人航空機</li>
-								 <li>脳外科手術シミュレータ</li>
-							 </ul>
-						</ul>
-						<img src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/lab.png" />
-					</section>
-					
-					<section>
-						<h3>脳外科手術シミュレータ</h3>
-						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/retraction.mp4" controls loop muted width="1000"></video> 
-						<p>脳組織に損傷を与えない力加減を訓練できるシステムを作りたい</p>
-					</section>
-					
-					<section>
-						<h3>物理演算に対するシステム要求</h3>
-						<ul>
-							<li>現実に近い物理現象</li>
-							<li>リアルタイム計算</li>
-						</ul>
-					</section>
-					
-					<section>
-						<h3>選択肢</h3>
-						<ul>
-							<li>バネ質点モデル</li>
-							<ul>
-								<li>計算コスト ○</li>
-								<li>物理現象の正確さ　△</li>
-							</ul>
-							<li>シェイプマッチング法</li>
-							<ul>
-								<li>計算コスト　○</li>
-								<li>物理現象の正確さ　×？</li>
-							</ul>
-							<li>有限要素法</li>
-								<li>計算コスト　×　</li>
-								<li>物理現象の正確さ　○</li>
-							<li>その他</li>
-						</ul>
-					</section>
-					
-					<section>
-						<h3>どのくらい達成できたか</h3>
-						<p>CPU GPU</p>
-					</section>
-					
-				</section>				
 				
 				
 				<!-- 概要セクション -->
