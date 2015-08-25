@@ -85,8 +85,6 @@
                                 <li>高度な書籍は理解できない</li>
                                 <li>グラフィクス系論文誌の中から理解できる範囲で試してみる他ない</li>
                             </ul>
-                          <p></p>
-                        <h3>次のスライドから現状で実現できたシミュレーションをご紹介します</h3>
                     </section>					
 					
 					<section>
@@ -132,41 +130,143 @@
 							<li>Corotational FEM</li>
 						</ul>
 					</section>
-					
+                    					                    
+                    <section>
+                    	<h3>このセクションの参考資料</h3>
+                    	<ul>
+                        	<li>佐瀬，HTML5による有限要素法に基づいた2次元弾性体変形シミュレーション <a href="http://www.natural-science.or.jp/article/20130922210408.php">http://www.natural-science.or.jp/article/20130922210408.php</a></li>
+                            <li>竹内，樫山，寺田，計算力学．森北出版．</li>
+                            <li>泉，酒井，実践有限要素法シミュレーション．森北出版．</li>
+                            <li>Coomputer Graphics Gems JP 2012, ボーンデジタル，2012.</li>
+                            <li>M. Müller, et al., "Stable real-time deformations," Proc. SCA 2002, pp. 49-54, 2002.</li>
+                            <li>Gino van den Bergen(ed.), and Dirk Gregorius(ed.), Game Physics Pearls, CRC Press, 2010.</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                    	<h3>前提</h3>
+                        <ul>
+                        	<li>四面体定ひずみ要素（= 四面体一次要素），あるいは，三角形定ひずみ要素（= 三角形一次要素）を用いる</li>
+                            <li>これらの要素は剛性マトリクスが数値積分なしに陽に求められる．</li>
+                            <li>微小変形を仮定し，線形FEMの枠組みを対象とする</li>
+                        </ul>
+                    </section>
+
+
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/henkei_example.jpg" 
+                            width = "1000"
+                            />
+                    </section>
+					                    
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/henkei.jpg" 
+                            width = "1000"
+                            />
+                    </section>
+                    
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/disp_vector.jpg" 
+                            width = "1000"
+                            />
+                    </section>
+
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/one_tetra.png" 
+                            width = "1000"
+                            />
+                            <p>線形FEMでは，「剛性マトリクス」を「変位ベクトル」に作用させることで「外力ベクトル」が得られる．</p>
+                    </section>
+
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/two_tetra.png" 
+                            height = "600"
+                            />
+                    </section>
+
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/expand.png" 
+                            height = "600"
+                            />
+                    </section>
+
+
 					<section>
-						<h3>解析領域の要素分割</h3>
-					</section>
-					
-					<section>
-						<h3>剛性マトリクス</h3>
+						<h3>変形の計算</h3>
+                        <p class="left">剛性方程式</p>
 						<script type="math/tex; mode=display">
-							\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+							\vec{f} = \mathbf{K} \vec{u}
 						</script>
+                        <p class="left">外力から変位を求めるには連立方程式を解く．</p>
+                        <script type="math/tex; mode=display">
+						    \vec{u} = \mathbf{K}^{-1} \vec{f}
+						</script>
+                        <p class="left">※実際には K は特異行列となるため幾何学的境界条件を付与する必要がある．<br />
+                        　（大抵の入門書に説明が書かれているので割愛）</p>
 					</section>
 					
 					<section>
 						<h3>動的解析</h3>
 						<h4>運動方程式</h4>
 							<script type="math/tex; mode=display">
-								\mathbf{M} \vec{\ddot{x}} + \mathbf{K} \vec{x} = \vec{f}
+								\mathbf{M} \vec{\ddot{u}} + \mathbf{K} \vec{u} = \vec{f}
 							</script>
+                            <p class="left">質量マトリクス M は対角要素に等価質量を配置した集中質量行列を用いることが多い．</p>
 						<h4>減衰項</h4>
 							<script type="math/tex; mode=display">
-								\mathbf{M} \vec{\ddot{x}} + \mathbf{C} \vec{\dot{x}} + \mathbf{K} \vec{x} = \vec{f}
+								\mathbf{M} \vec{\ddot{u}} + \mathbf{C} \vec{\dot{u}} + \mathbf{K} \vec{u} = \vec{f}
+							</script>
+                            <p class="left">減衰マトリクス C は安定性向上を目的としたレイリー減衰が用いられることが多い．</p>
+							<script type="math/tex; mode=display">
+								\mathbf{C} = \alpha \mathbf{M} + \beta \mathbf{K}
 							</script>
 					</section>
+                    
+                    <section>
+                    	<h3>時間積分</h3>
+                        <p class="left">インタラクティブCGでは陰解法が用いられる．</p>
+                        <ul>
+                        	<li>20 ms など長い時間刻みに対しても安定に計算可能</li>
+                        </ul>
+                        <p class="left">その場合，連立一次方程式に帰着する（導出は割愛）．</p>
+						<script type="math/tex; mode=display">
+                            \mathbf{A} \vec{v}^{i+1} = \vec{b} 
+                        </script>
+                    </section>
+                    
+                    <section>
+                    	<h3>応力解析</h3>
+                        <p class="left">ひずみ</p>
+						<script type="math/tex; mode=display">
+                            \vec{\sigma}_e = \mathbf{B}_e \vec{u}_e 
+                        </script>
+  						<script type="math/tex; mode=display">
+                            \vec{\sigma}_e = [\sigma_x, \sigma_y, \sigma_z, \sigma_{xy}, \sigma_{yz}, \sigma_{zx}]^{T} 
+                        </script>
+                        <p class="left">応力</p>
+						<script type="math/tex; mode=display">
+                            \vec{\sigma}_e = \mathbf{D}_e \mathbf{\epsilon}_e  = \mathbf{D}_e \mathbf{B}_e \vec{u}_e
+                        </script>
+  						<script type="math/tex; mode=display">
+                            \vec{\sigma}_e = [\sigma_x, \sigma_y, \sigma_z, \sigma_{xy}, \sigma_{yz}, \sigma_{zx}]^{T} 
+                        </script>
+                        <p class="left">De: ひずみ-応力マトリクス，Be: 変位-ひずみマトリクス</p>
+                    </section>
 					
-					<section>
-						<h3>Corotational FEM</h3>
-					</section>
 				</section>
-				
-				
-				<!-- 実装セクション -->
+                
+
+				<!-- Corotational FEM セクション -->
 				<section>
-					<section>
-						<h3>実装</h3>
-					</section>
+                    <section>
+                            <h3>Corotational FEM</h3>
+                    </section>
 					
 					<section>
 						<h3>回転</h3>
