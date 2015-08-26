@@ -76,29 +76,19 @@
 						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/retraction.mp4" controls loop muted width="1000"></video> 
                         <p>臓器の力学挙動をできる限り正確に計算　→　有限要素法</p>
 					</section>
-					
-                    <section>
-                    	<h3>有限要素法は難しい・・・？</h3>
-                        	<p>我々は物理シミュレーションの専門家ではなかった，手探り状態の開発の過程で大変だったことは・・・．</p>
-                        	<ul>
-                            	<li>基礎的な入門書は実用性が低い（そもそもインタラクティブCGを目的としていない）</li>
-                                <li>高度な書籍は理解できない</li>
-                                <li>グラフィクス系論文誌の中から理解できる範囲で試してみる他ない</li>
-                            </ul>
-                    </section>					
-					
+										
 					<section>
-						<h3>Polygon mesh embedding</h3>
+                    	<h3>できたこと その１ Polygon mesh embedding</h3>
 						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/armadillo.mp4" controls loop  muted  height="650"></video> 
 					</section>
 										
 					<section>
-						<h3>Stress visualization</h3>
+                    	<h3>できたこと その２ Stress visualization</h3>
 						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/bunny.mp4" controls loop  muted height="650"></video> 
 					</section>
 										
 					<section>
-						<h3>Fracture</h3>
+                    	<h3>できたこと その３ Fracture</h3>
 						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/torus.mp4" controls loop  muted height="650"></video> 
 					</section>
 				</section>
@@ -109,8 +99,8 @@
 					<section>
 						<h3>Contents</h3>
 						<ul>
-							<li>有限要素法の概要</li>
-							<li>実装</li>
+							<li>有限要素法の手続きの概要</li>
+							<li>Corotational Linear FEM</li>
 							<li>GPUによる高速化</li>
 						</ul>
 					</section>				
@@ -122,79 +112,79 @@
 				<section>
 					<section>
 						<h3>有限要素法の概要</h3>
+                        <ul>
+                        	<li>理論を学ぶには入門書</li>
+                            <li>実装に必要と思われる最小限の内容をピックアップします．</li>
+                        </ul>
+                        <P></P>
+                        <h4>取り扱う内容</h4>
 						<ul>
 							<li>解析領域の要素分割</li>
 							<li>剛性マトリクス</li>
 							<li>動的解析</li>
 							<li>応力解析</li>
-							<li>Corotational FEM</li>
 						</ul>
 					</section>
                     					                    
                     <section>
-                    	<h3>このセクションの参考資料</h3>
-                    	<ul>
-                        	<li>佐瀬，HTML5による有限要素法に基づいた2次元弾性体変形シミュレーション <a href="http://www.natural-science.or.jp/article/20130922210408.php">http://www.natural-science.or.jp/article/20130922210408.php</a></li>
-                            <li>竹内，樫山，寺田，計算力学．森北出版．</li>
-                            <li>泉，酒井，実践有限要素法シミュレーション．森北出版．</li>
-                            <li>Coomputer Graphics Gems JP 2012, ボーンデジタル，2012.</li>
-                            <li>M. Müller, et al., "Stable real-time deformations," Proc. SCA 2002, pp. 49-54, 2002.</li>
-                            <li>Gino van den Bergen(ed.), and Dirk Gregorius(ed.), Game Physics Pearls, CRC Press, 2010.</li>
-                        </ul>
-                    </section>
-                    
-                    <section>
-                    	<h3>前提</h3>
-                        <ul>
-                        	<li>四面体定ひずみ要素（= 四面体一次要素），あるいは，三角形定ひずみ要素（= 三角形一次要素）を用いる</li>
-                            <li>これらの要素は剛性マトリクスが数値積分なしに陽に求められる．</li>
-                            <li>微小変形を仮定し，線形FEMの枠組みを対象とする</li>
-                        </ul>
-                    </section>
-
-
-                    <section>
+                    	<h3>メッシュによる解析領域の設定</h3>
 						<img 
-                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/henkei_example.jpg" 
-                            width = "1000"
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/mesh.png" 
+                            width = "600"
                             />
+                        <p>三次元では四面体，六面体などによる体積メッシュが必要．</p>
+                        <p>要素：メッシュの小領域，　節点：要素頂点の集合</p>
                     </section>
 					                    
+                   <!--
                     <section>
 						<img 
                         	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/henkei.jpg" 
                             width = "1000"
                             />
                     </section>
+                    -->
                     
                     <section>
+                    	<h3>変位ベクトルによる変形の表現</h3>
 						<img 
                         	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/disp_vector.jpg" 
-                            width = "1000"
+                            width = "750"
                             />
+                        <p>FEMでは節点の物理量をひとまとめにして大きいベクトルを用いる．</p>
+                        <p>変位ベクトル u，外力ベクトル f</p>
                     </section>
 
                     <section>
+                    	<h3>線形FEMにおける要素レベルのつり合いの式</h3>
 						<img 
                         	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/one_tetra.png" 
                             width = "1000"
                             />
-                            <p>線形FEMでは，「剛性マトリクス」を「変位ベクトル」に作用させることで「外力ベクトル」が得られる．</p>
+						<script type="math/tex; mode=display">
+							\vec{f}_e = \mathbf{K}_e \vec{u}_e
+						</script>                            
+                        <p>「変位ベクトル」に「剛性マトリクス」を作用させることで「外力ベクトル」が得られる．</p>
+                        <p> Ke は<b>ヤング率</b>，<b>ポアソン比</b>，要素頂点の<b>初期位置</b>によっ て作成する行列．</p>
                     </section>
 
                     <section>
+                    	<h3>全体レベルのつり合いの式</h3>
 						<img 
                         	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/two_tetra.png" 
-                            height = "600"
+                            height = "500"
                             />
+                         <p>全体剛性マトリクスはサイズを拡張した要素剛性マトリクスの総和</p>
                     </section>
 
+<!--
                     <section>
 						<img 
                         	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/expand.png" 
                             height = "600"
                             />
                     </section>
+                    -->
 
 
 					<section>
@@ -210,6 +200,30 @@
                         <p class="left">※実際には K は特異行列となるため幾何学的境界条件を付与する必要がある．<br />
                         　（大抵の入門書に説明が書かれているので割愛）</p>
 					</section>
+                    
+                    <section>
+                    	<h3>もっと詳しく…</h3>
+                    	<ul>
+                        	<li>佐瀬，HTML5による有限要素法に基づいた2次元弾性体変形シミュレーション <a href="http://www.natural-science.or.jp/article/20130922210408.php">http://www.natural-science.or.jp/article/20130922210408.php</a></li>
+                            <li>泉，酒井，実践有限要素法シミュレーション．森北出版．</li>
+                            <li>竹内，樫山，寺田，計算力学．森北出版．</li>
+<!--                            <li>Coomputer Graphics Gems JP 2012, ボーンデジタル，2012.</li>
+                            <li>M. Müller, et al., "Stable real-time deformations," Proc. SCA 2002, pp. 49-54, 2002.</li>
+                            <li>Gino van den Bergen(ed.), and Dirk Gregorius(ed.), Game Physics Pearls, CRC Press, 2010.</li> -->
+                        </ul>
+                    </section>
+                    
+                    <!--
+                    <section>
+                    	<h3>前提</h3>
+                        <ul>
+                        	<li>四面体定ひずみ要素（= 四面体一次要素），あるいは，三角形定ひずみ要素（= 三角形一次要素）を用いる</li>
+                            <li>これらの要素は剛性マトリクスが数値積分なしに陽に求められる．</li>
+                            <li>微小変形を仮定し，線形FEMの枠組みを対象とする</li>
+                        </ul>
+                    </section>
+                    -->
+
 					
 					<section>
 						<h3>動的解析</h3>
@@ -217,7 +231,7 @@
 							<script type="math/tex; mode=display">
 								\mathbf{M} \vec{\ddot{u}} + \mathbf{K} \vec{u} = \vec{f}
 							</script>
-                            <p class="left">質量マトリクス M は対角要素に等価質量を配置した集中質量行列を用いることが多い．</p>
+                            <p class="left">質量マトリクス M は，対角要素に等価質量を配置した集中質量行列を用いることが多い．</p>
 						<h4>減衰項</h4>
 							<script type="math/tex; mode=display">
 								\mathbf{M} \vec{\ddot{u}} + \mathbf{C} \vec{\dot{u}} + \mathbf{K} \vec{u} = \vec{f}
@@ -226,28 +240,33 @@
 							<script type="math/tex; mode=display">
 								\mathbf{C} = \alpha \mathbf{M} + \beta \mathbf{K}
 							</script>
+                         <p class="left">参考：竹内，樫山，寺田，「計算力学」．森北出版．</p>
 					</section>
                     
                     <section>
                     	<h3>時間積分</h3>
-                        <p class="left">インタラクティブCGでは陰解法が用いられる．</p>
-                        <ul>
-                        	<li>20 ms など長い時間刻みに対しても安定に計算可能</li>
-                        </ul>
+                        <p class="left">インタラクティブCGなら陰解法．20 ms など長い時間刻みに対しても安定に計算可能</p>
                         <p class="left">その場合，連立一次方程式に帰着する（導出は割愛）．</p>
 						<script type="math/tex; mode=display">
                             \mathbf{A} \vec{v}^{i+1} = \vec{b} 
                         </script>
-                    </section>
+                        <p></p>
+                         <h4>参考</h4>
+							<ul>
+                            <li>M. Müller, et al., "Stable real-time deformations," Proc. SCA 2002, pp. 49-54, 2002.</li>
+                            <li>Gino van den Bergen(ed.), and Dirk Gregorius(ed.), Game Physics Pearls, CRC Press, 2010.</li>                    
+                            </ul>
+                            </section>
+                            
                     
                     <section>
                     	<h3>応力解析</h3>
                         <p class="left">ひずみ</p>
 						<script type="math/tex; mode=display">
-                            \vec{\sigma}_e = \mathbf{B}_e \vec{u}_e 
+                            \vec{\epsilon}_e = \mathbf{B}_e \vec{u}_e 
                         </script>
   						<script type="math/tex; mode=display">
-                            \vec{\sigma}_e = [\sigma_x, \sigma_y, \sigma_z, \sigma_{xy}, \sigma_{yz}, \sigma_{zx}]^{T} 
+                            \vec{\epsilon}_e = [\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{xy}, \epsilon_{yz}, \epsilon_{zx}]^{T} 
                         </script>
                         <p class="left">応力</p>
 						<script type="math/tex; mode=display">
@@ -256,10 +275,33 @@
   						<script type="math/tex; mode=display">
                             \vec{\sigma}_e = [\sigma_x, \sigma_y, \sigma_z, \sigma_{xy}, \sigma_{yz}, \sigma_{zx}]^{T} 
                         </script>
-                        <p class="left">De: ひずみ-応力マトリクス，Be: 変位-ひずみマトリクス</p>
+                        <p class="left">De: ひずみ-応力マトリクス（ヤング率，ポアソン比で決まる）</p>
+                        <p class="left">Be: 変位-ひずみマトリクス（要素節点の初期位置で決まる）</p>
                     </section>
 					
+                    
+                    <section>
+                    	<h3>主応力</h3>
+                        <p class="left">応力テンソル</p>
+                        \[
+							\mathbf{S} = 
+							\left(
+							\begin{matrix}
+								\sigma_x &amp; \sigma_{xy} &amp;  \sigma_{xz}   \\
+								\sigma_{xy} &amp; \sigma_{y} &amp;  \sigma_{yz}   \\
+								\sigma_{xz} &amp; \sigma_{yz} &amp;  \sigma_{z}   
+							\end{matrix}
+							\right)
+                        \]
+                        <p class="left">主応力は応力テンソルの固有値 σ1, σ2, σ3．</p>
+                        <p class="left">四面体の応力をスカラーで表したときは最大主応力などを用いることができる．</p>
+                    </section>
 				</section>
+                
+                <section>
+                	<h3>Demo 2d</h3>
+                       	<p><a href="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/app/fem/fem.html">http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/app/fem/fem.html</a></p>
+                </section>
                 
 
 				<!-- Corotational FEM セクション -->
@@ -267,12 +309,47 @@
                     <section>
                             <h3>Corotational FEM</h3>
                     </section>
+                    
+                    <section>
+                    	<h3>Linear FEM 回転による不自然な変形</h3> 
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/linear_corotational.png" 
+                            />        
+                        <p>(左) Linear FEM,   (右) Corotational Linear FEM</p>
+                        <p class="left">微小変形理論における線形ひずみは回転が圧縮として評価される．</p>
+                        <p class="left">幾何学的非線形性：回転に起因する非線形性</p>
+                        <p class="left">非線形FEMの枠組みで解くべきだが，Corotational FEM と呼ばれる定式化によって線形FEMを拡張することである程度対応できる．</p>
+                    </section>
+                    
+                    <section>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/corotational_coordinate.png" 
+                            height = "600"
+                            />                    	
+                    </section>
 					
 					<section>
 						<h3>回転</h3>
 						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/tetra_rotation.mp4" controls loop  muted height="650"></video> 
 					</section>
 					
+					<section>
+						<h3>ヤング率</h3>
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/young.mp4" controls loop  muted height="650"></video>								
+                    </section>
+                    
+                    
+					<section>
+						<h3>減衰</h3>
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/damping.mp4" controls loop  muted height="650"></video>								
+                    </section>
+                    
+					<section>
+						<h3>メッシュ埋め込み</h3>
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/mesh_embedding.mp4" controls loop  muted height="650"></video>								
+                    </section>
+                    
+                    
 				</section>
 				
 				
@@ -361,8 +438,8 @@
 	</body>
 
 	<div id="distribute_div">
-		<p class="distribute_p">Project - https://github.com/sasekazu/slides_fem_cedec2015</p>				
-		<p class="distribute_p">Slides - http://sasekazu.github.io/slides_fem_cedec2015</p>				
+		<!-- <p class="distribute_p">Project - https://github.com/sasekazu/slides_fem_cedec2015</p>				-->
+		<p class="distribute_p">スライド配布 - http://sasekazu.github.io/slides_fem_cedec2015</p>				
 	</div>
 
 </html>
