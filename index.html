@@ -324,13 +324,31 @@
                     <section>
 						<img 
                         	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/corotational_coordinate.png" 
-                            height = "600"
-                            />                    	
+                            height = "300"
+                            />
+                            <h4>Linear FEM</h4>
+                        \[
+                         \vec{f}_e = \mathbf{K}_e \left( \vec{x}_e - \vec{x}_{0e} \right)
+                        \]
+                        <p></p>
+                        <h4>Corotational Linear FEM</h4>                   	
+                        \[
+                        \begin{align}
+                         \vec{f}_e  &amp; = \mathbf{R}_e \mathbf{K}_e \left( \mathbf{R}_e^T \vec{x}_e - \vec{x}_{0e} \right) = \mathbf{R}_e \mathbf{K}_e \mathbf{R}_e^T \vec{x}_e - \mathbf{R}_e \mathbf{K}_e \vec{x}_{0e} =  \mathbf{K}'_e  \vec{x}_e - \vec{f}_{0e} 
+                         \end{align}
+                        \]          
+                        <p></p>
+                        <ul>   
+                            <li>M. Müller, et al., "Stable real-time deformations," SCA 2002.</li>      	
+                            <li>M. Müller and M. Gross, "Interactive Virtual Materials," GI 2004.</li>
+                        </ul>
                     </section>
 					
 					<section>
-						<h3>回転</h3>
-						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/tetra_rotation.mp4" controls loop  muted height="650"></video> 
+						<h3>回転成分の抽出</h3>
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/tetra_rotation.mp4" controls loop  muted height="450"></video> 
+                        <p class="left">変形勾配テンソルの右極分解（SVDを用いる）により，剛体回転成分を抽出する．</p>
+                        <p class="left">G. Irving, et al., "Invertible finite elements for robust simulation of large deformation," SIGGRAPH 2004.</p>
 					</section>
 					
 					<section>
@@ -346,7 +364,8 @@
                     
 					<section>
 						<h3>メッシュ埋め込み</h3>
-						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/mesh_embedding.mp4" controls loop  muted height="650"></video>								
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/mesh_embedding.mp4" controls loop  muted height="550"></video>						
+                        <p class="left">Gino van den Bergen(ed.), and Dirk Gregorius(ed.), Game Physics Pearls, CRC Press, 2010.</p>		
                     </section>
                     
                     
@@ -357,33 +376,69 @@
 				<section>
 					<section>
 						<h3>GPUによる高速化</h3>
+                        <h4>手法１</h4>
+                        <ul>
+                        	<li>Reduction array を用いたマトリクスアセンブリ and 共役勾配法による連立一次方程式求解</li>
+                            <li>C. Cecka, et al., "Application of assembly of finite element methods on graphics processors for real-time elastodynamics," GPU Computing Gems, 2011.</li>
+                         </ul>
+                         <p></p>
+                         <h4>手法２</h4>
+                         <ul>
+                        	<li> Element-by-element 法による全体剛性マトリクスを作成せずに共役勾配法を実行する方法</li>
+                            <li>J. Allard, et al., "Implicit FEM Solver on GPU for Interactive Deformation Simulation," GPU Computing Gems Jade Edition, 2012.</li>
+                            <li>土木学会編，計算力学の常識，丸善．</li>
+                        </ul>
 					</section>
 					
 					<section>
-						<h3>GPUによる剛性マトリクス組み立て</h3>
+						<h3>手法1 GPUによる剛性マトリクス組み立て</h3>
+                        <ul>
+                        	<li>疎行列格納形式を用いる CSR (Complessed Sparse Row format) など</li>
+                            <li>非零要素ごとに総和元インデックスリストを作成する</li>
+                            <li>非零要素ごとに並列に総和を実行</li>
+                        </ul>
 					</section>
 					
 					<section>
-						<h3>連立一次方程式の解法</h3>
+						<h3>手法1 連立一次方程式の解法</h3>
+                        <ul>
+                        	<li>共役勾配法を用いる</li>
+                            <li>疎行列-ベクトル 積などの行列演算を cuspase, cublass で実装</li>
+                            <li>反復数は 40 ほど必要</li>
+                            <li>対角スケーリング前処理が有効</li>
+                        </ul>
 					</section>
 					
-					<section>
-						<h3>Element-by-Element アプローチ</h3>
-					</section>
+                    <section>
+                    	<h3>結果</h3>
+						<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/result_time.png" 
+                            width = "1200"
+                            />         
+                            <ul>
+                            	<li>GPU実装したのは Matrix assembly と Solve (対角スケーリング付き共役勾配法 反復数40 ) </li>
+                                <li class="fragment">Matrix assembly 3.8 ms のうち 2.4 ms が CPU-GPU 間メモリ転送</li>
+                                <li class="fragment">Solve 14.7 ms のうち 8.2 ms が CPU-GPU 間メモリ転送</li>
+                            </ul>
+                    </section>
 				</section>
 				
 				<!-- まとめセクション -->
 				<section>
 					<section>
 						<h3>まとめ</h3>
+                        <ul>
+                        	<li>Corotaional Linear FEM が実用的．</li>
+                            <li>GPU実装は，CPU-GPU間データ転送を最小化すれば，5-10 倍のスピードアップが見込める．（対象規模，マシンスペックによる）</li>
+                        </ul>
 					</section>
 					
 					<section>
 						<h3>デモのご案内</h3>
-					</section>
-					
-					<section>
-						<h3>ご質問</h3>
+           				<img 
+                        	src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/figs/demo.png" 
+                            height = "600"
+                            />
 					</section>
 				</section>
 				
