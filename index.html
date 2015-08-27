@@ -368,6 +368,11 @@
                         <p class="left">Gino van den Bergen(ed.), and Dirk Gregorius(ed.), Game Physics Pearls, CRC Press, 2010.</p>		
                     </section>
                     
+                    <section>
+                    	<h3>Limitation: 大ひずみにより振動が生じる（発散はしない）</h3>
+						<video src="http://scc.ist.hokudai.ac.jp/~sase/workshop/cedec2015/slide_resources/movie/vibration.mp4" controls loop  muted height="550"></video>						
+                        <p class="left"> Aleka McAdams, et al., "Efficient elasticity for character skinning with contact and collisions," SIGGRAPH2011</p>		
+                    </section>
                     
 				</section>
 				
@@ -407,6 +412,7 @@
                             <li>反復数は 40 ほど必要</li>
                             <li>対角スケーリング前処理が有効</li>
                         </ul>
+                        <p class="left">金田(編)，並列数値処理，コロナ社．</p>
 					</section>
 					
                     <section>
@@ -417,8 +423,9 @@
                             />         
                             <ul>
                             	<li>GPU実装したのは Matrix assembly と Solve (対角スケーリング付き共役勾配法 反復数40 ) </li>
-                                <li class="fragment">Matrix assembly 3.8 ms のうち 2.4 ms が CPU-GPU 間メモリ転送</li>
-                                <li class="fragment">Solve 14.7 ms のうち 8.2 ms が CPU-GPU 間メモリ転送</li>
+                            	<li>対象モデル：半脳，節点数 8647, 四面体要素数 32639</li>
+                                <li class="fragment">Matrix assembly 3.8 ms のうち <font color="red">2.4 ms が CPU-GPU 間データ転送</font></li>
+                                <li class="fragment">Solve 14.7 ms のうち <font color="red">8.2 ms が CPU-GPU 間データ転送</font></li>
                             </ul>
                     </section>
 				</section>
@@ -440,6 +447,34 @@
                             height = "600"
                             />
 					</section>
+				</section>
+				
+				
+				
+				<!-- 補助資料 -->
+				
+				<section>
+					<h3>さらなる高速化</h3>
+						<h4>マルチグリッド法</h4>
+							<p class="left">階層メッシュを用いて反復法の収束を加速させる方法．</p>
+							<p class="left">ボクセルメッシュ，六面体要素に対して適用するアプローチが多い．</p>
+							<p class="left">C. Dick, et al., "A real-time multigrid finite hexahedra method for elasticity simulation using CUDA," Simulation Modelling Practice and Theory, 19(2), 801–816. 2011.</p>
+							<p class="left"> Aleka McAdams, et al., "Efficient elasticity for character skinning with contact and collisions," SIGGRAPH2011</p>		
+							<p class="left">Georgii, J., and Westermann, R. (2008). Corotated Finite Elements Made Fast and Stable. Proceedings of the 5th Workshop on Virtual Reality Interaction and Physical Simulation, 11–19. </p>
+				</section>
+				
+				<section>
+					<h3>FEMのCG分野における商用化の動向</h3>
+						<p>近年では商用ソフトへの導入も盛んに行われている．</p>
+						<ul>
+							<li>2008年 Pixelux EntertainmentがFEMベースの物理エンジンDMMを開発</li>
+							<li>2009年 家庭用ゲーム機 (PS3, Xbox360) においてDMMを用いたリアルタイム破壊シミュレーションが実現 [1]</li>
+							<li>2012年 MayaがDMMプラグインを搭載</li>
+							<li>2013年 Houdiniが独自のFEMソルバを導入</li>
+						</ul>
+						<p class="left">今後はGPGPUによる高速化によりリアルタイムアプリケーションへのFEMの応用がさらに加速することが予想される．</p>
+						<p class="left">[1] E.G. Parker and J.F. O'Brien, "Real-Time Deformation and Fracture in a Game Environment," SCA2009. </p>
+						 
 				</section>
 				
 
